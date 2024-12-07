@@ -2,14 +2,13 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+require("dotenv").config();
 
 app.use(bodyParser.json());
 
 app.post("/getResponse", (req, res) => {
   console.log(req.body);
-  const genAI = new GoogleGenerativeAI(
-    "AIzaSyCJWTo1bDnbxF7jUQj5yEZlz6CZRyL8dmI"
-  );
+  const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   model
